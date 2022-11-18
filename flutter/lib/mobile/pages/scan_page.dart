@@ -42,9 +42,9 @@ class _ScanPageState extends State<ScanPage> {
                 icon: Icon(Icons.image_search),
                 iconSize: 32.0,
                 onPressed: () async {
-                  final ImagePicker _picker = ImagePicker();
+                  final ImagePicker picker = ImagePicker();
                   final XFile? file =
-                      await _picker.pickImage(source: ImageSource.gallery);
+                      await picker.pickImage(source: ImageSource.gallery);
                   if (file != null) {
                     var image = img.decodeNamedImage(
                         File(file.path).readAsBytesSync(), file.path)!;
@@ -196,6 +196,8 @@ void showServerSettingsWithValue(String id, String relay, String key,
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                     TextFormField(
+                      obscureText: true,
+                      enabled: false,
                       controller: idController,
                       decoration: InputDecoration(
                           labelText: translate('ID Server'),
@@ -220,7 +222,7 @@ void showServerSettingsWithValue(String id, String relay, String key,
                       ),
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       validator: (v) {
-                        if (v != null && v.length > 0) {
+                        if (v != null && v.isNotEmpty) {
                           if (!(v.startsWith('http://') ||
                               v.startsWith("https://"))) {
                             return translate("invalid_http");
@@ -231,6 +233,8 @@ void showServerSettingsWithValue(String id, String relay, String key,
                     ),
                     TextFormField(
                       initialValue: key,
+                      obscureText: true,
+                      enabled: false,
                       decoration: InputDecoration(
                         labelText: 'Key',
                       ),

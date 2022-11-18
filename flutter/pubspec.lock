@@ -64,6 +64,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.0.1"
+  bot_toast:
+    dependency: "direct main"
+    description:
+      name: bot_toast
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.0.3"
   build:
     dependency: transitive
     description:
@@ -250,8 +257,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: bf278fc8a8ff787e46fa3ab97674373bfaa20f23
-      resolved-ref: bf278fc8a8ff787e46fa3ab97674373bfaa20f23
+      ref: "9b4c5ac1aec2c4d1bdabb4dd29e4bc3b75c76a79"
+      resolved-ref: "9b4c5ac1aec2c4d1bdabb4dd29e4bc3b75c76a79"
       url: "https://github.com/Kingtous/rustdesk_desktop_multi_window"
     source: git
     version: "0.1.0"
@@ -376,8 +383,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: dec2166e881c47d922e1edc484d10d2cd5c2103b
-      resolved-ref: dec2166e881c47d922e1edc484d10d2cd5c2103b
+      ref: bfb19c84a8244771488bc05cc5f9c9b5e0324cfd
+      resolved-ref: bfb19c84a8244771488bc05cc5f9c9b5e0324cfd
       url: "https://github.com/Kingtous/rustdesk_flutter_custom_cursor"
     source: git
     version: "0.0.1"
@@ -864,62 +871,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.2"
-  shared_preferences:
-    dependency: "direct main"
-    description:
-      name: shared_preferences
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.15"
-  shared_preferences_android:
-    dependency: transitive
-    description:
-      name: shared_preferences_android
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.13"
-  shared_preferences_ios:
-    dependency: transitive
-    description:
-      name: shared_preferences_ios
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.1.1"
-  shared_preferences_linux:
-    dependency: transitive
-    description:
-      name: shared_preferences_linux
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.1.1"
-  shared_preferences_macos:
-    dependency: transitive
-    description:
-      name: shared_preferences_macos
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.4"
-  shared_preferences_platform_interface:
-    dependency: transitive
-    description:
-      name: shared_preferences_platform_interface
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.1.0"
-  shared_preferences_web:
-    dependency: transitive
-    description:
-      name: shared_preferences_web
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.4"
-  shared_preferences_windows:
-    dependency: transitive
-    description:
-      name: shared_preferences_windows
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.1.1"
   shelf:
     dependency: transitive
     description:
@@ -1063,9 +1014,11 @@ packages:
   uni_links_desktop:
     dependency: "direct main"
     description:
-      name: uni_links_desktop
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: "."
+      ref: "5be5113d59c753989dbf1106241379e3fd4c9b18"
+      resolved-ref: "5be5113d59c753989dbf1106241379e3fd4c9b18"
+      url: "https://github.com/fufesou/uni_links_desktop.git"
+    source: git
     version: "0.1.3"
   uni_links_platform_interface:
     dependency: transitive
@@ -1267,8 +1220,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "88487257cbafc501599ab4f82ec343b46acec020"
-      resolved-ref: "88487257cbafc501599ab4f82ec343b46acec020"
+      ref: "32b24c66151b72bba033ef8b954486aa9351d97b"
+      resolved-ref: "32b24c66151b72bba033ef8b954486aa9351d97b"
       url: "https://github.com/Kingtous/rustdesk_window_manager"
     source: git
     version: "0.2.7"
