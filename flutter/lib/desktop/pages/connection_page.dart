@@ -104,16 +104,6 @@ class _ConnectionPageState extends State<ConnectionPage>
               controller: _scrollController,
               physics: NeverScrollableScrollPhysics(),
               slivers: [
-                SliverList(
-                    delegate: SliverChildListDelegate([
-                  Row(
-                    children: [
-                      _buildRemoteIDTextField(context),
-                    ],
-                  ).marginOnly(top: 22),
-                  SizedBox(height: 12),
-                  Divider().paddingOnly(right: 12),
-                ])),
                 SliverFillRemaining(
                   hasScrollBody: false,
                   child: PeerTabPage(
