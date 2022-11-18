@@ -130,7 +130,6 @@ class _DesktopSettingPageState extends State<DesktopSettingPage>
                       _Safety(),
                       _Network(),
                       _Account(),
-                      _About(),
                     ],
                   )),
             ),
@@ -807,10 +806,6 @@ class _NetworkState extends State<_Network> with AutomaticKeepAliveClientMixin {
             controller: scrollController,
             physics: NeverScrollableScrollPhysics(),
             children: [
-              _lock(locked, 'Unlock Network Settings', () {
-                locked = false;
-                setState(() => {});
-              }),
               AbsorbPointer(
                 absorbing: locked,
                 child: Column(children: [
