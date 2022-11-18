@@ -202,7 +202,8 @@ typedef LabelGetter = Rx<String> Function(String key);
 
 /// [_lastClickTime], help to handle double click
 int _lastClickTime =
-    DateTime.now().millisecondsSinceEpoch - bind.getDoubleClickTime() - 1000;
+    (DateTime.now().millisecondsSinceEpoch - bind.getDoubleClickTime() - 1000)
+        .toInt();
 
 class DesktopTab extends StatelessWidget {
   final bool showLogo;

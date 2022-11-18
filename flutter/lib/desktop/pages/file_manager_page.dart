@@ -58,7 +58,8 @@ class _FileManagerPageState extends State<FileManagerPage>
 
   /// [_lastClickTime], [_lastClickEntry] help to handle double click
   int _lastClickTime =
-      DateTime.now().millisecondsSinceEpoch - bind.getDoubleClickTime() - 1000;
+      (DateTime.now().millisecondsSinceEpoch - bind.getDoubleClickTime() - 1000)
+          .toInt();
   Entry? _lastClickEntry;
 
   final _dropMaskVisible = false.obs; // TODO impl drop mask
