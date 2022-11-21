@@ -14,7 +14,9 @@ on:
       - '*'
     paths-ignore:
       - ".github/**"
-
+env:
+  LLVM_VERSION: "10.0"
+  
 jobs:
   # ensure_cargo_fmt:
   #   name: Ensure 'cargo fmt' has been run
@@ -64,26 +66,31 @@ jobs:
           # - { target: aarch64-unknown-linux-gnu   , os: ubuntu-20.04, use-cross: true }
           # - { target: arm-unknown-linux-gnueabihf , os: ubuntu-20.04, use-cross: true }
           # - { target: arm-unknown-linux-musleabihf, os: ubuntu-20.04, use-cross: true }
-          # - { target: i686-pc-windows-msvc        , os: windows-2019                  }
+          - { target: i686-pc-windows-msvc        , os: windows-2019                  }
           # - { target: i686-unknown-linux-gnu      , os: ubuntu-20.04, use-cross: true }
           # - { target: i686-unknown-linux-musl     , os: ubuntu-20.04, use-cross: true }
           # - { target: x86_64-apple-darwin         , os: macos-10.15                   }
           # - { target: x86_64-pc-windows-gnu       , os: windows-2019                  }
-          # - { target: x86_64-pc-windows-msvc      , os: windows-2019                  }
-          - { target: x86_64-unknown-linux-gnu    , os: ubuntu-20.04                  }
+          - { target: x86_64-pc-windows-msvc      , os: windows-2019                  }
+          # - { target: x86_64-unknown-linux-gnu    , os: ubuntu-20.04                  }
           # - { target: x86_64-unknown-linux-musl   , os: ubuntu-20.04, use-cross: true }
     steps:
     - name: Checkout source code
       uses: actions/checkout@v3
+    
+    - name: Install LLVM and Clang
+      uses: KyleMayes/install-llvm-action@v1
+      with:
+        version: ${{ env.LLVM_VERSION }}
 
-    - name: Install prerequisites
-      shell: bash
-      run: |
-        case ${{ matrix.job.target }} in
-          x86_64-unknown-linux-gnu) sudo apt-get -y update ; sudo apt install -y g++ gcc git curl wget nasm yasm libgtk-3-dev clang libxcb-randr0-dev libxdo-dev libxfixes-dev libxcb-shape0-dev libxcb-xfixes0-dev libasound2-dev libpulse-dev cmake libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev;;
-          # arm-unknown-linux-*) sudo apt-get -y update ; sudo apt-get -y install gcc-arm-linux-gnueabihf ;;
-          # aarch64-unknown-linux-gnu) sudo apt-get -y update ; sudo apt-get -y install gcc-aarch64-linux-gnu ;;
-        esac
+#     - name: Install prerequisites
+#       shell: bash
+#       run: |
+#         case ${{ matrix.job.target }} in
+#           x86_64-unknown-linux-gnu) sudo apt-get -y update ; sudo apt install -y g++ gcc git curl wget nasm yasm libgtk-3-dev clang libxcb-randr0-dev libxdo-dev libxfixes-dev libxcb-shape0-dev libxcb-xfixes0-dev libasound2-dev libpulse-dev cmake libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev;;
+#           # arm-unknown-linux-*) sudo apt-get -y update ; sudo apt-get -y install gcc-arm-linux-gnueabihf ;;
+#           # aarch64-unknown-linux-gnu) sudo apt-get -y update ; sudo apt-get -y install gcc-aarch64-linux-gnu ;;
+#         esac
 
     - name: Restore from cache and install vcpkg
       uses: lukka/run-vcpkg@v7
@@ -99,9 +106,10 @@ jobs:
     - name: Install Rust toolchain
       uses: actions-rs/toolchain@v1
       with:
-        toolchain: stable
+        toolchain: "1.62"
         target: ${{ matrix.job.target }}
         override: true
+        components: rustfmt
         profile: minimal # minimal component installation (ie, no documentation)
 
     - name: Show version information (Rust, cargo, GCC)
@@ -115,6 +123,8 @@ jobs:
         rustc -V
 
     - uses: Swatinem/rust-cache@v1
+      with:
+          prefix-key: ${{ matrix.job.os }}
   
     - name: Build
       uses: actions-rs/cargo@v1
