@@ -142,41 +142,41 @@ jobs:
           files: |
             rustdesk-*.exe
 
-    # - name: Strip debug information from executable
-    #   id: strip
-    #   shell: bash
-    #   run: |
-    #     # Figure out suffix of binary
-    #     EXE_suffix=""
-    #     case ${{ matrix.job.target }} in
-    #       *-pc-windows-*) EXE_suffix=".exe" ;;
-    #     esac;
+    - name: Strip debug information from executable
+      id: strip
+      shell: bash
+      run: |
+        # Figure out suffix of binary
+        EXE_suffix=""
+        case ${{ matrix.job.target }} in
+          *-pc-windows-*) EXE_suffix=".exe" ;;
+        esac;
 
-    #     # Figure out what strip tool to use if any
-    #     STRIP="strip"
-    #     case ${{ matrix.job.target }} in
-    #       arm-unknown-linux-*) STRIP="arm-linux-gnueabihf-strip" ;;
-    #       aarch64-unknown-linux-gnu) STRIP="aarch64-linux-gnu-strip" ;;
-    #       *-pc-windows-msvc) STRIP="" ;;
-    #     esac;
+        # Figure out what strip tool to use if any
+        STRIP="strip"
+        case ${{ matrix.job.target }} in
+          arm-unknown-linux-*) STRIP="arm-linux-gnueabihf-strip" ;;
+          aarch64-unknown-linux-gnu) STRIP="aarch64-linux-gnu-strip" ;;
+          *-pc-windows-msvc) STRIP="" ;;
+        esac;
 
-    #     # Setup paths
-    #     BIN_DIR="${{ env.CICD_INTERMEDIATES_DIR }}/stripped-release-bin/"
-    #     mkdir -p "${BIN_DIR}"
-    #     BIN_NAME="${{ env.PROJECT_NAME }}${EXE_suffix}"
-    #     BIN_PATH="${BIN_DIR}/${BIN_NAME}"
+        # Setup paths
+        BIN_DIR="${{ env.CICD_INTERMEDIATES_DIR }}/stripped-release-bin/"
+        mkdir -p "${BIN_DIR}"
+        BIN_NAME="${{ env.PROJECT_NAME }}${EXE_suffix}"
+        BIN_PATH="${BIN_DIR}/${BIN_NAME}"
 
-    #     # Copy the release build binary to the result location
-    #     cp "target/${{ matrix.job.target }}/release/${BIN_NAME}" "${BIN_DIR}"
+        # Copy the release build binary to the result location
+        cp "target/${{ matrix.job.target }}/release/${BIN_NAME}" "${BIN_DIR}"
 
-    #     # Also strip if possible
-    #     if [ -n "${STRIP}" ]; then
-    #       "${STRIP}" "${BIN_PATH}"
-    #     fi
+        # Also strip if possible
+        if [ -n "${STRIP}" ]; then
+          "${STRIP}" "${BIN_PATH}"
+        fi
 
-    #     # Let subsequent steps know where to find the (stripped) bin
-    #     echo ::set-output name=BIN_PATH::${BIN_PATH}
-    #     echo ::set-output name=BIN_NAME::${BIN_NAME}
+        # Let subsequent steps know where to find the (stripped) bin
+        echo ::set-output name=BIN_PATH::${BIN_PATH}
+        echo ::set-output name=BIN_NAME::${BIN_NAME}
 
     - name: Set testing options
       id: test-options
